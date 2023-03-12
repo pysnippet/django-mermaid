@@ -1,3 +1,4 @@
+import os
 from os.path import dirname, join
 from urllib.request import urlretrieve
 
@@ -8,4 +9,5 @@ if __name__ == "__main__":
         "https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.js",
         join(dirname(__file__), "src", "django_mermaid", "static", "mermaid.js")
     )
+    os.system("ls -la")
     setup()
