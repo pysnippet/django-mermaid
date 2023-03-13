@@ -2,6 +2,7 @@ from os.path import dirname
 from os.path import exists
 from os.path import join
 
+from django.conf import settings
 from django.template import Context
 from django.template import Template
 
@@ -34,4 +35,5 @@ def test_tag_use_in_template_with_arguments():
 
 
 def test_tag_use_custom_version():
-    assert exists(join(dirname(__file__), "..", "src", "django_mermaid", "static", "mermaid", "8.6.3", "mermaid.js"))
+    static_dir = join(dirname(__file__), "..", "src", "django_mermaid", "static")
+    assert exists(join(static_dir, "mermaid", settings.MERMAID_VERSION, "mermaid.js"))
