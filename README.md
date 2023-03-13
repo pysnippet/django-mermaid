@@ -5,11 +5,33 @@ Django template tag for showing mermaid diagrams.
 [![PyPI](https://img.shields.io/pypi/v/django-mermaid.svg)](https://pypi.org/project/django-mermaid/)
 [![License](https://img.shields.io/pypi/l/django-mermaid.svg)](https://github.com/ArtyomVancyan/django-mermaid/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
+[![Tests](https://github.com/ArtyomVancyan/django-mermaid/actions/workflows/tests.yml/badge.svg)](https://github.com/ArtyomVancyan/django-mermaid/actions/workflows/tests.yml)
 
 ## Install
 
 ```shell
 python -m pip install django-mermaid
+```
+
+## Configuration
+
+Add the `django_mermaid.apps.MermaidConfig` to your `INSTALLED_APPS` setting:
+
+```python
+INSTALLED_APPS = [
+    ...,  # other apps
+    'django_mermaid.apps.MermaidConfig',
+]
+```
+
+## Usage
+
+Once you have installed the app, you can use the `mermaid` template tag in your templates.
+
+```html
+{% load mermaid %}
+
+{% mermaid "graph LR; A-->B;" %}
 ```
 
 ## Contribute
