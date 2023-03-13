@@ -1,4 +1,6 @@
 .idea
 .tox
 *.egg-info
+dist
+build
 mermaid.js
