@@ -15,7 +15,7 @@ class MermaidConfig(AppConfig):
     def ready(self):
         """Download mermaid.js from CDN if not already present"""
         mermaid_version = getattr(settings, "MERMAID_VERSION", "9.4.3")
-        cdn = "https://cdnjs.cloudflare.com/ajax/libs/mermaid/%s/mermaid.js" % mermaid_version
+        cdn = "https://cdnjs.cloudflare.com/ajax/libs/mermaid/%s/mermaid.min.js" % mermaid_version
         static_dir = join(dirname(__file__), "static")
         mermaid_dir = join(static_dir, "mermaid", mermaid_version)
         if not exists(join(mermaid_dir, "mermaid.js")) or \
