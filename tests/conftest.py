@@ -10,5 +10,6 @@ def pytest_configure():
             {
                 "BACKEND": "django.template.backends.django.DjangoTemplates",
             },
-        ]
+        ],
+        MERMAID_VERSION="8.6.3",  # Use a specific version of mermaid
     )
