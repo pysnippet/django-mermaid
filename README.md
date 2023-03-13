@@ -28,11 +28,20 @@ INSTALLED_APPS = [
 
 Once you have installed the app, you can use the `mermaid` template tag in your templates.
 
-```html
+```jinja2
 {% load mermaid %}
-
 {% mermaid "graph LR; A-->B;" %}
 ```
+
+By default, Django Mermaid uses the **9.4.3** version of mermaid. However, if you want to use a specific version of
+mermaid, you can set the `MERMAID_VERSION` variable in your Django project's settings.py file.
+
+```python
+MERMAID_VERSION = '10.0.3-alpha.1'
+```
+
+Make sure the version you specify is available on the [mermaid CDN](https://cdnjs.com/libraries/mermaid), and has
+the `mermaid.min.js` file.
 
 ## Contribute
 
