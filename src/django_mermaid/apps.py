@@ -6,7 +6,8 @@ from os.path import join
 from urllib.request import urlretrieve
 
 from django.apps import AppConfig
-from django.conf import settings
+
+from .templatetags import MERMAID_VERSION
 
 
 class MermaidConfig(AppConfig):
@@ -14,10 +15,9 @@ class MermaidConfig(AppConfig):
 
     def ready(self):
         """Download mermaid.js from CDN if not already present"""
-        mermaid_version = getattr(settings, "MERMAID_VERSION", "9.4.3")
-        cdn = "https://cdnjs.cloudflare.com/ajax/libs/mermaid/%s/mermaid.min.js" % mermaid_version
+        cdn = "https://cdnjs.cloudflare.com/ajax/libs/mermaid/%s/mermaid.min.js" % MERMAID_VERSION
         static_dir = join(dirname(__file__), "static")
-        mermaid_dir = join(static_dir, "mermaid", mermaid_version)
+        mermaid_dir = join(static_dir, "mermaid", MERMAID_VERSION)
         if not exists(join(mermaid_dir, "mermaid.js")) or \
                 stat(join(mermaid_dir, "mermaid.js")).st_size == 0:
             dir_util.create_tree(mermaid_dir, ["mermaid.js"])

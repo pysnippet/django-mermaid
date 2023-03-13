@@ -2,6 +2,8 @@ from django import template
 from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 
+from . import MERMAID_VERSION
+
 register = template.Library()
 
 
@@ -14,5 +16,6 @@ def mermaid(diagram="", theme="default"):
     :param theme: The mermaid theme to use (default, forest, dark, neutral). See https://mermaid.js.org/config/theming.
     """
 
-    html = "<div class=\"mermaid\">%s</div><script src=\"%s\"></script>" % (diagram, static("mermaid.js"))
+    mermaid_uri = static("mermaid/%s/mermaid.js" % MERMAID_VERSION)
+    html = "<div class=\"mermaid\">%s</div><script src=\"%s\"></script>" % (diagram, mermaid_uri)
     return html + "<script>mermaid.initialize({\"startOnLoad\": true, theme: \"%s\"});</script>" % theme
