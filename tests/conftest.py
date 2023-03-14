@@ -1,4 +1,7 @@
+import pytest
 from django.conf import settings
+
+from django_mermaid.templatetags import DEFAULT_VERSION
 
 
 def pytest_configure():
@@ -13,3 +16,8 @@ def pytest_configure():
         ],
         MERMAID_VERSION="8.6.3",  # Use a specific version of mermaid
     )
+
+
+@pytest.fixture
+def version():
+    return getattr(settings, "MERMAID_VERSION", DEFAULT_VERSION)

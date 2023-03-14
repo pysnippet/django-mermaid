@@ -16,12 +16,13 @@ def test_tag_renders():
     )
 
 
-def test_tag_use_in_template():
+@override_settings(MERMAID_THEME="forest")
+def test_tag_use_settings_theme(version):
     template = Template("{% load mermaid %}{% mermaid content %}")
     template = template.render(Context({"content": "graph LR; A-->B;"}))
     assert template == (
             "<div class=\"mermaid\">graph LR; A-->B;</div><script src=\"mermaid/%s/mermaid.js\"></script>"
-            "<script>mermaid.initialize({\"startOnLoad\": true, theme: \"default\"});</script>" % MERMAID_VERSION
+            "<script>mermaid.initialize({\"startOnLoad\": true, theme: \"forest\"});</script>" % version
     )
 
 
