@@ -1,9 +1,7 @@
-from django.conf import settings
+DEFAULT_VERSION = "9.4.3"  # default to latest stable version
+DEFAULT_THEME = "default"  # use the mermaid 'default' theme
 
-MERMAID_VERSION = getattr(
-    settings,
-    "MERMAID_VERSION",
-    "9.4.3",  # default to latest stable version
-)
-
-__all__ = ["MERMAID_VERSION"]
+__all__ = [
+    "DEFAULT_VERSION",
+    "DEFAULT_THEME",
+]
