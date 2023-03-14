@@ -1,3 +1,5 @@
+import json
+
 from django import template
 from django.conf import settings
 from django.templatetags.static import static
@@ -15,12 +17,14 @@ def mermaid(diagram=None, theme=None):
     """Render a mermaid diagram.
 
     :param diagram: The mermaid diagram definition
-    :param theme: The mermaid theme to use (default, forest, dark, neutral). See https://mermaid.js.org/config/theming.
+    :param theme: The mermaid theme to use (default, forest, dark, neutral, base). See https://mermaid.js.org/config/theming.
     """
 
     version = getattr(settings, "MERMAID_VERSION", DEFAULT_VERSION)
     theme = theme or getattr(settings, "MERMAID_THEME", DEFAULT_THEME)
+    theme_variables = getattr(settings, "MERMAID_THEME_VARIABLES", {}) if theme == "base" else {}
 
     mermaid_uri = static("mermaid/%s/mermaid.js" % version)
     html = "<div class=\"mermaid\">%s</div><script src=\"%s\"></script>" % (diagram or "", mermaid_uri)
-    return html + "<script>mermaid.initialize({\"startOnLoad\": true, theme: \"%s\"});</script>" % theme
+    init_properties = {"startOnLoad": True, "theme": theme, "themeVariables": theme_variables}
+    return html + "<script>mermaid.initialize(%s);</script>" % json.dumps(init_properties)
