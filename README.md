@@ -33,15 +33,36 @@ Once you have installed the app, you can use the `mermaid` template tag in your 
 {% mermaid "graph LR; A-->B;" %}
 ```
 
+### Mermaid version
+
 By default, Django Mermaid uses the **9.4.3** version of mermaid. However, if you want to use a specific version of
-mermaid, you can set the `MERMAID_VERSION` variable in your Django project's settings.py file.
+mermaid, you can set the `MERMAID_VERSION` variable in your Django project's **settings.py** file.
 
 ```python
 MERMAID_VERSION = '10.0.3-alpha.1'
 ```
 
 Make sure the version you specify is available on the [mermaid CDN](https://cdnjs.com/libraries/mermaid), and has
-the `mermaid.min.js` file.
+the **mermaid.min.js** file.
+
+### Mermaid theme
+
+You can specify the theme right in the template tag dynamically overriding the value of the `MERMAID_THEME` variable.
+
+```jinja2
+{% mermaid "graph LR; A-->B;" "dark" %}
+```
+
+Also, you can set the `MERMAID_THEME` variable in your Django project's **settings.py** file as a default theme.
+However, Django Mermaid uses the
+[default](https://github.com/mermaid-js/mermaid/blob/develop/packages/mermaid/src/themes/theme-default.js) theme of
+mermaid by default.
+
+```python
+MERMAID_THEME = 'neutral'
+```
+
+The available themes supported by mermaid are listed at mermaid [docs](https://mermaid.js.org/config/theming).
 
 ## Contribute
 
