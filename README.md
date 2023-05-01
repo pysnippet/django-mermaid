@@ -1,6 +1,8 @@
 # Django Mermaid
 
 [![PyPI](https://img.shields.io/pypi/v/django-mermaid.svg)](https://pypi.org/project/django-mermaid/)
+[![Python](https://img.shields.io/pypi/pyversions/django-mermaid.svg?logoColor=white)](https://pypi.org/project/django-mermaid/)
+[![Django](https://img.shields.io/badge/django-1.11%20|%202.0%20|%203.0%20|%204.0%20|%204.2-0C4B33)](https://pypi.org/project/django-mermaid/)
 [![License](https://img.shields.io/pypi/l/django-mermaid.svg)](https://github.com/ArtyomVancyan/django-mermaid/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 [![Tests](https://github.com/ArtyomVancyan/django-mermaid/actions/workflows/tests.yml/badge.svg)](https://github.com/ArtyomVancyan/django-mermaid/actions/workflows/tests.yml)
