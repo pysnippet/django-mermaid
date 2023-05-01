@@ -4,3 +4,4 @@
 dist
 build
 mermaid.js
+__pycache__
