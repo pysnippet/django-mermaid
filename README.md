@@ -6,7 +6,10 @@
 [![License](https://img.shields.io/pypi/l/django-mermaid.svg)](https://github.com/pysnippet/django-mermaid/blob/master/LICENSE)
 [![Tests](https://github.com/pysnippet/django-mermaid/actions/workflows/tests.yml/badge.svg)](https://github.com/pysnippet/django-mermaid/actions/workflows/tests.yml)
 
-## Install
+Mermaid is a JavaScript-based diagramming and charting tool that renders Markdown-inspired text definitions to create
+and modify diagrams dynamically. And Django Mermaid aims to use mermaid diagrams in Django templates.
+
+## Installation
 
 ```shell
 python -m pip install django-mermaid
