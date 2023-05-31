@@ -1,4 +1,3 @@
-from os.path import dirname
 from os.path import exists
 from os.path import join
 
@@ -7,6 +6,15 @@ from django.template import Context
 from django.template import Template
 from django.test import override_settings
 from django_mermaid.templatetags import DEFAULT_THEME
+
+try:
+    import site
+
+    site_packages = site.getsitepackages()[0]
+except (ImportError, IndexError):
+    import sysconfig
+
+    site_packages = sysconfig.get_paths()["purelib"]
 
 
 def test_tag_use_in_template(version):
@@ -63,6 +71,7 @@ def test_tag_use_custom_theme_variables_with_base_theme(version):
     )
 
 
-def test_tag_use_custom_version(version):
-    static_dir = join(dirname(__file__), "..", "src", "django_mermaid", "static")
-    assert exists(join(static_dir, "mermaid", version, "mermaid.js"))
+def test_tag_use_custom_version():
+    static_dir = join(site_packages, "django_mermaid", "static")
+    assert exists(join(static_dir, "mermaid", "8.6.3", "mermaid.js"))
+    assert exists(join(static_dir, "mermaid", "9.4.3", "mermaid.js"))
