@@ -31,23 +31,18 @@ INSTALLED_APPS = [
 After you configure the `INSTALLED_APPS`, you will be able to load the `mermaid` in your template and use the template
 tags for rendering mermaid diagrams.
 
-For small diagrams we recommend the simple tag:
-
 ```jinja2
 {% load mermaid %}
+
+{# for small diagrams #}
 {% mermaid "graph LR; A-->B;" %}
-```
 
-For larger diagrams we recommend the block tag:
-
-```jinja2
-{% load mermaid %}
+{# for larger diagrams #}
 {% startmermaid %}
     graph LR
         A-->B
 {% endmermaid %}
 ```
-
 
 ### Mermaid version
 
