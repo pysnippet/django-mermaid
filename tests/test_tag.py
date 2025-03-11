@@ -1,13 +1,12 @@
 from os.path import exists
 from os.path import join
 
+import pytest
 from django.conf import settings
 from django.template import Context
 from django.template import Template
 from django.test import override_settings
 from django_mermaid.templatetags import DEFAULT_THEME
-
-import pytest
 
 try:
     import site
