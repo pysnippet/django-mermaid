@@ -97,4 +97,4 @@ don't forget to add tests for your changes.
 
 ## License
 
-Copyright (C) 2025 Artyom Vancyan. [MIT](https://github.com/pysnippet/django-mermaid/blob/master/LICENSE)
+Copyright (C) 2023 Artyom Vancyan. [MIT](https://github.com/pysnippet/django-mermaid/blob/master/LICENSE)
