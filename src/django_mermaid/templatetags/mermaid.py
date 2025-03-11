@@ -34,7 +34,7 @@ def mermaid(diagram=None, theme=None):
 
 
 @register.tag(name="startmermaid")
-def do_startmermaid(parser, token):
+def startmermaid(parser, token):
     """Render a mermaid diagram, using a block tag.
 
     {% startmermaid "dark" %}
@@ -45,15 +45,13 @@ def do_startmermaid(parser, token):
     This tag is identical to the {% mermaid %} simple tag but allows usage as a block.
     That can be useful for longer diagrams. Specifying the theme is optional.
     """
-    # Split the token to try to capture a theme parameter if provided
+
     bits = token.split_contents()
     if len(bits) > 1:
-        # Strip surrounding quotes
         theme = ast.literal_eval(bits[1])
     else:
         theme = None
 
-    # Parse everything until the end tag 'endmermaid'
     nodelist = parser.parse(('endmermaid',))
     parser.delete_first_token()
 
@@ -66,8 +64,5 @@ class MermaidNode(template.Node):
         self.theme = theme
 
     def render(self, context):
-        # Render the diagram from the block
         diagram_content = self.nodelist.render(context)
-        # Pass processing on to the simple template tag
         return mermaid(diagram=diagram_content, theme=self.theme)
-
