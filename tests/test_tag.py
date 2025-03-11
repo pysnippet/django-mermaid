@@ -1,6 +1,7 @@
 from os.path import exists
 from os.path import join
 
+import pytest
 from django.conf import settings
 from django.template import Context
 from django.template import Template
@@ -17,9 +18,16 @@ except (ImportError, IndexError):
     site_packages = sysconfig.get_paths()["purelib"]
 
 
-def test_tag_use_in_template(version):
+@pytest.mark.parametrize(
+    "template_code",
+    [
+        "{% load mermaid %}{% mermaid content %}",
+        "{% load mermaid %}{% startmermaid %}{{ content|safe }}{% endmermaid %}"
+    ]
+)
+def test_tag_use_in_template(version, template_code):
     theme = getattr(settings, "MERMAID_THEME", DEFAULT_THEME)
-    template = Template("{% load mermaid %}{% mermaid content %}")
+    template = Template(template_code)
     template = template.render(Context({"content": "graph LR; A-->B;"}))
     assert template == (
             "<div class=\"mermaid\">graph LR; A-->B;</div><script src=\"mermaid/%s/mermaid.js\"></script>"
@@ -29,8 +37,15 @@ def test_tag_use_in_template(version):
 
 
 @override_settings(MERMAID_THEME="forest")
-def test_tag_use_settings_theme(version):
-    template = Template("{% load mermaid %}{% mermaid content %}")
+@pytest.mark.parametrize(
+    "template_code",
+    [
+        "{% load mermaid %}{% mermaid content %}",
+        "{% load mermaid %}{% startmermaid %}{{ content|safe }}{% endmermaid %}"
+    ]
+)
+def test_tag_use_settings_theme(version, template_code):
+    template = Template(template_code)
     template = template.render(Context({"content": "graph LR; A-->B;"}))
     assert template == (
             "<div class=\"mermaid\">graph LR; A-->B;</div><script src=\"mermaid/%s/mermaid.js\"></script>"
@@ -39,8 +54,15 @@ def test_tag_use_settings_theme(version):
     )
 
 
-def test_tag_use_custom_theme(version):
-    template = Template("{% load mermaid %}{% mermaid content \"dark\" %}")
+@pytest.mark.parametrize(
+    "template_code",
+    [
+        "{% load mermaid %}{% mermaid content \"dark\" %}",
+        "{% load mermaid %}{% startmermaid \"dark\" %}{{ content|safe }}{% endmermaid %}"
+    ]
+)
+def test_tag_use_custom_theme(version, template_code):
+    template = Template(template_code)
     template = template.render(Context({"content": "graph LR; A-->B;"}))
     assert template == (
             "<div class=\"mermaid\">graph LR; A-->B;</div><script src=\"mermaid/%s/mermaid.js\"></script>"
@@ -50,8 +72,15 @@ def test_tag_use_custom_theme(version):
 
 
 @override_settings(MERMAID_THEME_VARIABLES={"primaryColor": "red"})
-def test_tag_use_custom_theme_variables(version):
-    template = Template("{% load mermaid %}{% mermaid content \"dark\" %}")
+@pytest.mark.parametrize(
+    "template_code",
+    [
+        "{% load mermaid %}{% mermaid content \"dark\" %}",
+        "{% load mermaid %}{% startmermaid \"dark\" %}{{ content|safe }}{% endmermaid %}"
+    ]
+)
+def test_tag_use_custom_theme_variables(version, template_code):
+    template = Template(template_code)
     template = template.render(Context({"content": "graph LR; A-->B;"}))
     assert template == (
             "<div class=\"mermaid\">graph LR; A-->B;</div><script src=\"mermaid/%s/mermaid.js\"></script>"
@@ -61,8 +90,15 @@ def test_tag_use_custom_theme_variables(version):
 
 
 @override_settings(MERMAID_THEME="base", MERMAID_THEME_VARIABLES={"primaryColor": "#efefef"})
-def test_tag_use_custom_theme_variables_with_base_theme(version):
-    template = Template("{% load mermaid %}{% mermaid content %}")
+@pytest.mark.parametrize(
+    "template_code",
+    [
+        "{% load mermaid %}{% mermaid content %}",
+        "{% load mermaid %}{% startmermaid %}{{ content|safe }}{% endmermaid %}"
+    ]
+)
+def test_tag_use_custom_theme_variables_with_base_theme(version, template_code):
+    template = Template(template_code)
     template = template.render(Context({"content": "graph LR; A-->B;"}))
     assert template == (
             "<div class=\"mermaid\">graph LR; A-->B;</div><script src=\"mermaid/%s/mermaid.js\"></script>"
