@@ -36,6 +36,24 @@ def test_tag_use_in_template(version, template_code):
     )
 
 
+@override_settings(MERMAID_USE_CDN=True)
+@pytest.mark.parametrize(
+    "template_code",
+    [
+        "{% load mermaid %}{% mermaid content %}",
+        "{% load mermaid %}{% startmermaid %}{{ content|safe }}{% endmermaid %}"
+    ]
+)
+def test_tag_use_mermaid_cdn(version, template_code):
+    template = Template(template_code)
+    template = template.render(Context({"content": "graph LR; A-->B;"}))
+    assert template == (
+            "<div class=\"mermaid\">graph LR; A-->B;</div><script src=\"https://cdnjs.cloudflare.com/ajax/libs/mermaid/%s/mermaid.min.js\"></script>"
+            "<script>mermaid.initialize({\"startOnLoad\": true, \"theme\": \"default\", \"themeVariables\""
+            ": {}});</script>" % version
+    )
+
+
 @override_settings(MERMAID_THEME="forest")
 @pytest.mark.parametrize(
     "template_code",
