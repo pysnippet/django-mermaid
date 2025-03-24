@@ -76,6 +76,15 @@ the `MERMAID_THEME` variable.
 {% startmermaid "dark" %}graph LR; A--B;{% endmermaid %}
 ```
 
+### Mermaid use CDN
+
+By default, Django Mermaid uses the local copy of mermaid from staticfiles. However, if you want to use the CDN version
+directly, you can set the `MERMAID_USE_CDN` variable in your Django project's **settings.py** file.
+
+```python
+MERMAID_USE_CDN = True
+```
+
 ### Mermaid theme variables
 
 You can define your custom theme by overriding the `MERMAID_THEME_VARIABLES` variable. You will need to use

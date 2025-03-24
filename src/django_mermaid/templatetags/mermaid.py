@@ -7,7 +7,9 @@ from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 
 from . import DEFAULT_THEME
+from . import DEFAULT_USE_CDN
 from . import DEFAULT_VERSION
+from . import MERMAID_CDN
 
 register = template.Library()
 
@@ -24,10 +26,11 @@ def mermaid(diagram=None, theme=None):
     """
 
     version = getattr(settings, "MERMAID_VERSION", DEFAULT_VERSION)
+    use_cdn = getattr(settings, "MERMAID_USE_CDN", DEFAULT_USE_CDN)
     theme = theme or getattr(settings, "MERMAID_THEME", DEFAULT_THEME)
     theme_variables = getattr(settings, "MERMAID_THEME_VARIABLES", {}) if theme == "base" else {}
 
-    mermaid_uri = static("mermaid/%s/mermaid.js" % version)
+    mermaid_uri = MERMAID_CDN % version if use_cdn else static("mermaid/%s/mermaid.js" % version)
     html = "<div class=\"mermaid\">%s</div><script src=\"%s\"></script>" % (diagram or "", mermaid_uri)
     init_properties = {"startOnLoad": True, "theme": theme, "themeVariables": theme_variables}
     return html + "<script>mermaid.initialize(%s);</script>" % json.dumps(init_properties)
