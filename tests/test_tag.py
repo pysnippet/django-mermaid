@@ -120,5 +120,3 @@ def test_tag_use_custom_theme_variables_with_base_theme(version, template_code):
             "<script>mermaid.initialize({\"startOnLoad\": true, \"theme\": \"base\", \"themeVariables\": "
             "{\"primaryColor\": \"#efefef\"}});</script>" % version
     )
-
-
