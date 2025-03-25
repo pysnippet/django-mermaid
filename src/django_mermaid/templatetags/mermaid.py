@@ -55,7 +55,7 @@ def startmermaid(parser, token):
     else:
         theme = None
 
-    nodelist = parser.parse(('endmermaid',))
+    nodelist = parser.parse(("endmermaid",))
     parser.delete_first_token()
 
     return MermaidNode(nodelist, theme)
