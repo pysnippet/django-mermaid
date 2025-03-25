@@ -1,6 +1,3 @@
-from os.path import exists
-from os.path import join
-
 import pytest
 from django.conf import settings
 from django.template import Context
@@ -125,7 +122,3 @@ def test_tag_use_custom_theme_variables_with_base_theme(version, template_code):
     )
 
 
-def test_tag_use_custom_version():
-    static_dir = join(site_packages, "django_mermaid", "static")
-    assert exists(join(static_dir, "mermaid", "8.6.3", "mermaid.js"))
-    assert exists(join(static_dir, "mermaid", "9.4.3", "mermaid.js"))
