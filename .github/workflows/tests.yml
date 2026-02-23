@@ -8,15 +8,14 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-          - python: "3.7"
-            env: py37-django11
-            os: ubuntu-20.04  # 3.7 is not available on ubuntu-latest
           - python: "3.8"
             env: py38-django11
+          - python: "3.9"
+            env: py39-django11
 
           - python: "3.8"
             env: py38-django21
